@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opiskelijaravintolat</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/icon2.png" alt="Logo" class="logo-icon">
+            <h1>Opiskelijaravintolat</h1>
+        </div>
+        <nav>
+            <button id="about-btn">About</button>
+            <button id="login-btn">Kirjaudu</button>
+            <button id="register-btn">Rekisteröidy</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Фильтры и выбор меню -->
+        <section class="controls">
+            <div class="filters">
+                <input type="text" id="city-filter" placeholder="Hae kaupungin tai nimen mukaan">
+                <select id="provider-filter">
+                    <option value="">Kaikki palveluntarjoajat</option>
+                    <option value="provider1">Palveluntarjoaja 1</option>
+                </select>
+            </div>
+            <div class="menu-type">
+                <select id="menu-type">
+                    <option value="day">Päivän ruokalista</option>
+                    <option value="week">Viikon ruokalista</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Основной контент -->
+        <section class="content">
+            <!-- Список ресторанов -->
+            <section class="restaurant-list">
+                <h2>Ravintolat</h2>
+                <ul id="restaurants">
+                    <!-- Список ресторанов будет заполнен через JavaScript -->
+                </ul>
+            </section>
+
+            <!-- Карта -->
+            <section class="map">
+                <h2>Kartta</h2>
+                <div id="map-container">
+                    <!-- Карта будет здесь -->
+                </div>
+            </section>
+        </section>
+
+        <!-- Меню -->
+        <section class="menu">
+            <h2 id="menu-title">Ruokalista</h2>
+            <div id="menu-content">
+                <!-- Меню будет здесь -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Opiskelijaravintolat.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
