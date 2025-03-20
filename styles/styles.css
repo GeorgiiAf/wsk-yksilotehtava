@@ -16,6 +16,7 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* kuvake */
 .logo {
     display: flex;
     align-items: center;
@@ -103,7 +104,7 @@ nav button:hover {
     cursor: pointer;
 }
 
-restaurant-list li:hover {
+.restaurant-list li:hover {
     background-color: #f9f9f9;
 }
 
@@ -120,6 +121,8 @@ restaurant-list li:hover {
     background-color: #ddd;
     border-radius: 4px;
 }
+
+/* ruokalistat */
 
 .menu {
     padding: 20px;
@@ -144,6 +147,8 @@ footer {
     margin-top: 20px;
     background: linear-gradient(135deg, #3497fa, #8a2be2);
 }
+
+/* sisäämkirjautuminen ja rekisteröinti */
 
 .auth-form {
     max-width: 400px;
@@ -195,6 +200,8 @@ footer {
     text-decoration: underline;
 }
 
+/* profiili */
+
 .profile {
     max-width: 600px;
     margin: 0 auto;
@@ -207,6 +214,14 @@ footer {
 .profile h2 {
     text-align: center;
     margin-bottom: 20px;
+}
+
+/* profiilikuva */
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
 }
 
 .profile-info {
@@ -262,7 +277,7 @@ footer {
     line-height: 1.6;
 }
 
-
+/* responsiivisuus */
 @media (max-width: 768px) {
 
     header {
@@ -288,13 +303,11 @@ footer {
 
     .controls {
         flex-direction: column;
-
         gap: 10px;
     }
 
     .content {
         flex-direction: column;
-        /* Контент в столбец */
     }
 
     .map {

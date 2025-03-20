@@ -6,23 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profiili</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles/styles.css">
 </head>
 
 <body>
     <header>
         <div class="logo">
-            <img src="images/icon2.png" alt="Logo" class="logo-icon">
+            <img src="../images/icon2.png" alt="Logo" class="logo-icon">
             <h1>Opiskelijaravintolat</h1>
         </div>
         <nav>
+            <a href="index.html"> <button id="home-btn">Koti</button></a>
             <button id="logout-btn">Kirjaudu ulos</button>
+
         </nav>
     </header>
 
     <main>
         <section class="profile">
             <h2>Profiili</h2>
+            <div class="profile-pic">
+                <img src="../images/icon.png" alt="Logo" class="logo-icon">
+            </div>
             <div class="profile-info">
                 <p><strong>Käyttäjätunnus:</strong> <span id="profile-username"></span></p>
                 <p><strong>Sähköposti:</strong> <span id="profile-email"></span></p>
@@ -31,6 +36,8 @@
                 <input type="text" id="new-username" placeholder="Uusi käyttäjätunnus">
                 <input type="email" id="new-email" placeholder="Uusi sähköposti">
                 <input type="password" id="new-password" placeholder="Uusi salasana">
+                <input type="Suosikkiravintola" id="Suosikkiravintola" placeholder="Suosikkiravintola" ,
+                    default="Ei suosikkia">
                 <button type="submit">Päivitä tiedot</button>
             </form>
         </section>
