@@ -1,4 +1,4 @@
-# Yksilötehätävä Opiskelijaravintolat
+# Yksilötehtävä Opiskelijaravintolat
 
 
 [link-to-the-layout](https://users.metropolia.fi/~georgiia/wsk-yksilotehtava/html/index.html)
