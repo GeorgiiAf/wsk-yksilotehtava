@@ -17,15 +17,16 @@
             <h1>Opiskelijaravintolat</h1>
         </div>
         <nav>
-            <a href="about.html"><button id="about-btn">About</button></a>
-            <a href="login.html"><button id="login-btn">Kirjaudu</button></a>
-            <a href="register.html"><button id="register-btn">Rekisteröidy</button></a>
-            <a href="profile.html"><button id="profile-btn">Profiili</button></a>
+            <a href="about.html" id="about-btn" class="button">About</a>
+            <a href="login.html" id="login-btn" class="button">Kirjaudu</a>
+            <a href="register.html" id="register-btn" class="button">Rekisteröidy</a>
+            <a href="profile.html" id="profile-btn" class="button">Profiili</a>
+
         </nav>
     </header>
 
     <main>
-        <section class="controls">
+        <div class="controls">
             <div class="filters">
                 <input type="text" id="city-filter" placeholder="Hae kaupungin tai nimen mukaan">
                 <select id="provider-filter">
@@ -39,21 +40,19 @@
                     <option value="week">Viikon ruokalista</option>
                 </select>
             </div>
-        </section>
+        </div>
 
-        <section class="content">
+        <div class="content">
             <section class="restaurant-list">
                 <h2>Ravintolat</h2>
-                <ul id="restaurants">
-                </ul>
+                <ul id="restaurants"></ul>
             </section>
 
             <section class="map">
                 <h2>Kartta</h2>
-                <div id="map-container">
-                </div>
+                <div id="map-container"></div>
             </section>
-        </section>
+        </div>
 
         <section class="menu">
             <h2 id="menu-title">Ruokalista</h2>
@@ -65,7 +64,7 @@
     <footer>
         <p>&copy; 2025 Opiskelijaravintolat.</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>

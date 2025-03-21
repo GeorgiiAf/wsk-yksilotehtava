@@ -35,7 +35,7 @@ header {
     color: white;
 }
 
-nav button {
+nav a.button {
     padding: 8px 12px;
     margin-left: 10px;
     border: none;
@@ -43,9 +43,11 @@ nav button {
     background-color: #2980b9;
     color: white;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
 
-nav button:hover {
+nav a.button:hover {
     background-color: #1f6391;
 }
 

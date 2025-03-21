@@ -16,9 +16,8 @@
             <h1>Opiskelijaravintolat</h1>
         </div>
         <nav>
-            <a href="index.html"> <button id="home-btn">Koti</button></a>
-            <button id="logout-btn">Kirjaudu ulos</button>
-
+            <a href="index.html" id="home-btn" class="button">Koti</a>
+            <a href="login.html" id="login-btn" class="button">Kirjaudu ulos</a>
         </nav>
     </header>
 
@@ -36,8 +35,7 @@
                 <input type="text" id="new-username" placeholder="Uusi käyttäjätunnus">
                 <input type="email" id="new-email" placeholder="Uusi sähköposti">
                 <input type="password" id="new-password" placeholder="Uusi salasana">
-                <input type="Suosikkiravintola" id="Suosikkiravintola" placeholder="Suosikkiravintola" ,
-                    default="Ei suosikkia">
+                <input type="text" id="Suosikkiravintola" placeholder="Suosikkiravintola" value="Ei suosikkia">
                 <button type="submit">Päivitä tiedot</button>
             </form>
         </section>
@@ -46,7 +44,7 @@
     <footer>
         <p>&copy; 2025 Opiskelijaravintolat.</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>
