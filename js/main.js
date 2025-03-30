@@ -74,7 +74,7 @@ function populateFilters(restaurants) {
 
 // Render restaurants list
 function renderRestaurants(restaurants) {
-    console.log('Rendering restaurants:', restaurants); // Отладка
+    console.log('Rendering restaurants:', restaurants);
     restaurantsList.innerHTML = '';
 
     if (restaurants.length === 0) {
@@ -85,17 +85,22 @@ function renderRestaurants(restaurants) {
     restaurants.forEach(restaurant => {
         const li = document.createElement('li');
         li.innerHTML = `
-            <strong>${restaurant.name}</strong>
-            <div class="restaurant-info">
-                <span>${restaurant.city || 'Kaupunki ei saatavilla'}</span>
-                <span>•</span>
-                <span>${restaurant.provider || 'Tarjoaja ei saatavilla'}</span>
+            <div class="restaurant-item">
+                <strong>${restaurant.name}</strong>
+                <div class="restaurant-meta">
+                    <span>${restaurant.city || 'Kaupunki ei saatavilla'}</span>
+                    <span>•</span>
+                    <span>${restaurant.provider || 'Tarjoaja ei saatavilla'}</span>
+                </div>
             </div>
         `;
-        li.addEventListener('click', () => {
+
+        li.addEventListener('click', (e) => {
+            e.stopPropagation();
             selectRestaurant(restaurant);
-            dropdownContent.style.display = 'none';
+            dropdownContent.classList.remove('active');
         });
+
         restaurantsList.appendChild(li);
     });
 }
@@ -186,17 +191,37 @@ function setupEventListeners() {
         dropdownContent.classList.toggle('active');
     });
 
-    // Предотвращаем закрытие при клике внутри выпадающего списка
-    dropdownContent?.addEventListener('click', (e) => {
-        e.stopPropagation();
+    // Обработчик для всего документа
+    document.addEventListener('click', (e) => {
+        // Закрываем только если клик был вне выпадающего списка и не по кнопке
+        if (!dropdownContent.contains(e.target)) {
+            dropdownContent.classList.remove('active');
+        }
     });
 
-    // Закрытие при клике вне списка
-    document.addEventListener('click', () => {
-        dropdownContent.classList.remove('active');
+    // Специальные обработчики для элементов внутри выпадающего списка
+    const dropdownElements = [
+        searchInput,
+        cityFilter,
+        providerFilter,
+        restaurantsList
+    ];
+
+    dropdownElements.forEach(el => {
+        el?.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            // Для элементов списка ресторанов - дополнительная логика
+            if (el === restaurantsList) {
+                const listItem = e.target.closest('li');
+                if (listItem) {
+                    dropdownContent.classList.remove('active');
+                }
+            }
+        });
     });
 
-    // Обработчики для фильтров (остаются без изменений)
+    // Обработчики изменений фильтров
     searchInput?.addEventListener('input', filterRestaurants);
     cityFilter?.addEventListener('change', filterRestaurants);
     providerFilter?.addEventListener('change', filterRestaurants);

@@ -328,6 +328,25 @@ footer {
     overflow-y: auto;
 }
 
+.dropdown-content.active {
+    display: block;
+    animation: fadeIn 0.2s ease-out;
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .search-filters {
     padding: 15px;
     background: #f8f9fa;
@@ -335,6 +354,12 @@ footer {
     position: sticky;
     top: 0;
     z-index: 1001;
+}
+
+/* Запрещаем выделение текста при кликах */
+.restaurant-selector * {
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .filter-group {
