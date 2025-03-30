@@ -1,7 +1,9 @@
 import { initMap, addMarker, clearMarkers } from './map.js';
 import { fetchRestaurants, fetchRestaurantMenu } from './api.js';
 
+
 let selectedRestaurant = null;
+let allRestaurants = [];
 
 // DOM Elements
 const dropdownBtn = document.getElementById('restaurant-dropdown-btn');
@@ -10,66 +12,75 @@ const restaurantsList = document.getElementById('restaurants-list');
 const searchInput = document.getElementById('restaurant-search');
 const cityFilter = document.getElementById('city-filter');
 const providerFilter = document.getElementById('provider-filter');
-const selectedRestaurantName = document.getElementById('selected-restaurant-name');
 const restaurantName = document.getElementById('restaurant-name');
-const restaurantLocation = document.getElementById('restaurant-location').querySelector('.text');
-const restaurantPhone = document.getElementById('restaurant-phone').querySelector('.text');
+const restaurantLocation = document.getElementById('restaurant-location');
+const restaurantPhone = document.getElementById('restaurant-phone');
 const menuContent = document.getElementById('menu-content');
 const menuTypeBtns = document.querySelectorAll('.menu-type-btn');
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async () => {
-    // Initialize map
-    initMap([60.1699, 24.9384]); // Default to Helsinki center
+    console.log('Initializing application...');
 
-    // Load restaurants
     try {
+        // Initialize map
+        initMap([60.1699, 24.9384]);
+
+        // Load restaurants
         allRestaurants = await fetchRestaurants();
+        console.log('Fetched restaurants:', allRestaurants);
+
         populateFilters(allRestaurants);
         renderRestaurants(allRestaurants);
         setupEventListeners();
+
+        // Show first restaurant by default
+        if (allRestaurants.length > 0) {
+            selectRestaurant(allRestaurants[0]);
+        }
     } catch (error) {
         console.error('Initialization error:', error);
-        restaurantsList.innerHTML = '<li class="error">Failed to load restaurants</li>';
+        showError('Failed to load restaurants. Please try again later.');
     }
 });
 
-// Fetch restaurants from API
-async function fetchRestaurants() {
-    try {
-        const response = await fetch('https://media2.edu.metropolia.fi/restaurant/api/v1/restaurants');
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        return data.restaurants || data;
-    } catch (error) {
-        console.error('Error fetching restaurants:', error);
-        throw error;
-    }
+
+function showError(message) {
+    restaurantsList.innerHTML = `<li class="error">${message}</li>`;
 }
 
-// Populate filter dropdowns
-function populateFilters(restaurants) {
-    // Get unique cities and providers
-    const cities = [...new Set(restaurants.map(r => r.city))];
-    const providers = [...new Set(restaurants.map(r => r.company))];
 
-    // Populate city filter
+function populateFilters(restaurants) {
+    console.log('Populating filters with restaurants:', restaurants); // Отладка
+
+    cityFilter.innerHTML = '<option value="">Kaikki kaupungit</option>';
+    providerFilter.innerHTML = '<option value="">Kaikki palveluntarjoajat</option>';
+
+    const cities = [...new Set(restaurants.map(r => r.city))].filter(Boolean);
+    const providers = [...new Set(restaurants.map(r => r.provider))].filter(Boolean);
+
     cities.forEach(city => {
-        cityFilter.innerHTML += `<option value="${city}">${city}</option>`;
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        cityFilter.appendChild(option);
     });
 
-    // Populate provider filter
     providers.forEach(provider => {
-        providerFilter.innerHTML += `<option value="${provider}">${provider}</option>`;
+        const option = document.createElement('option');
+        option.value = provider;
+        option.textContent = provider;
+        providerFilter.appendChild(option);
     });
 }
 
 // Render restaurants list
 function renderRestaurants(restaurants) {
+    console.log('Rendering restaurants:', restaurants); // Отладка
     restaurantsList.innerHTML = '';
 
     if (restaurants.length === 0) {
-        restaurantsList.innerHTML = '<li class="no-results">No restaurants found</li>';
+        restaurantsList.innerHTML = '<li class="no-results">Ei ravintoloita löytynyt</li>';
         return;
     }
 
@@ -78,80 +89,81 @@ function renderRestaurants(restaurants) {
         li.innerHTML = `
             <strong>${restaurant.name}</strong>
             <div class="restaurant-info">
-                <span>${restaurant.city}</span>
+                <span>${restaurant.city || 'Kaupunki ei saatavilla'}</span>
                 <span>•</span>
-                <span>${restaurant.company}</span>
+                <span>${restaurant.provider || 'Tarjoaja ei saatavilla'}</span>
             </div>
         `;
-
         li.addEventListener('click', () => {
             selectRestaurant(restaurant);
             dropdownContent.style.display = 'none';
         });
-
         restaurantsList.appendChild(li);
     });
 }
 
-// Load restaurant menu
+
+
 async function loadRestaurantMenu(restaurantId) {
     try {
         const activeBtn = document.querySelector('.menu-type-btn.active');
         const menuType = activeBtn ? activeBtn.dataset.type : 'day';
 
-        const endpoint = menuType === 'day'
-            ? `daily/${restaurantId}/fi`
-            : `weekly/${restaurantId}/fi`;
+        menuContent.innerHTML = '<div class="loading">Ladataan ruokalistaa...</div>';
 
-        const response = await fetch(`https://media2.edu.metropolia.fi/restaurant/api/v1/restaurants/${endpoint}`);
-        if (!response.ok) throw new Error('Menu not found');
-
-        const menuData = await response.json();
+        const menuData = await fetchRestaurantMenu(restaurantId, menuType);
         renderMenu(menuData, menuType);
     } catch (error) {
         console.error('Error loading menu:', error);
-        menuContent.innerHTML = '<div class="error">Failed to load menu</div>';
+        menuContent.innerHTML = '<div class="error">Ruokalistan lataaminen epäonnistui</div>';
     }
 }
 
-// Render menu
+
 function renderMenu(menuData, type) {
+    if (!menuData) {
+        menuContent.innerHTML = '<div class="error">Ruokalista ei saatavilla</div>';
+        return;
+    }
+
     if (type === 'day') {
         menuContent.innerHTML = `
             <div class="menu-daily">
-                ${menuData.courses.map(course => `
+                ${menuData.courses?.map(course => `
                     <div class="menu-item">
-                        <div class="course-name">${course.name}</div>
+                        <div class="course-name">${course.name || 'Nimetön ruoka'}</div>
                         <div class="course-info">
                             <span class="course-price">${course.price || ''}</span>
                             ${course.diets ? `<span class="course-diets">${course.diets}</span>` : ''}
                         </div>
                     </div>
-                `).join('')}
+                `).join('') || '<p>Ei ruokalistaa tälle päivälle</p>'}
             </div>
         `;
     } else {
         menuContent.innerHTML = `
             <div class="menu-weekly">
-                ${menuData.days.map(day => `
+                ${menuData.days?.map(day => `
                     <div class="day-menu">
                         <h4>${new Date(day.date).toLocaleDateString('fi-FI', { weekday: 'long', day: 'numeric', month: 'numeric' })}</h4>
-                        ${day.courses.map(course => `
+                        ${day.courses?.map(course => `
                             <div class="menu-item">
-                                <div class="course-name">${course.name}</div>
+                                <div class="course-name">${course.name || 'Nimetön ruoka'}</div>
                                 <div class="course-info">
                                     <span class="course-price">${course.price || ''}</span>
                                 </div>
                             </div>
-                        `).join('')}
+                        `).join('') || '<p>Ei ruokalistaa tälle päivälle</p>'}
                     </div>
-                `).join('')}
+                `).join('') || '<p>Viikon ruokalista ei saatavilla</p>'}
             </div>
         `;
     }
 }
 
+
 // Filter restaurants
+
 function filterRestaurants() {
     const searchTerm = searchInput.value.toLowerCase();
     const city = cityFilter.value;
@@ -159,9 +171,9 @@ function filterRestaurants() {
 
     const filtered = allRestaurants.filter(restaurant => {
         const matchesSearch = restaurant.name.toLowerCase().includes(searchTerm) ||
-            restaurant.city.toLowerCase().includes(searchTerm);
+            (restaurant.city && restaurant.city.toLowerCase().includes(searchTerm));
         const matchesCity = city === '' || restaurant.city === city;
-        const matchesProvider = provider === '' || restaurant.company === provider;
+        const matchesProvider = provider === '' || restaurant.provider === provider;
 
         return matchesSearch && matchesCity && matchesProvider;
     });
@@ -169,18 +181,16 @@ function filterRestaurants() {
     renderRestaurants(filtered);
 }
 
-// Setup event listeners
 function setupEventListeners() {
     // Dropdown toggle
-    dropdownBtn.addEventListener('click', () => {
+    dropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
     });
 
     // Close dropdown when clicking outside
-    document.addEventListener('click', (event) => {
-        if (!dropdownBtn.contains(event.target)) {
-            dropdownContent.style.display = 'none';
-        }
+    document.addEventListener('click', () => {
+        dropdownContent.style.display = 'none';
     });
 
     // Filter events
@@ -201,24 +211,28 @@ function setupEventListeners() {
     });
 }
 
-
-// Select a restaurant
 function selectRestaurant(restaurant) {
+    if (!restaurant) return;
+
     selectedRestaurant = restaurant;
+    console.log('Selected restaurant:', restaurant); // Отладка
 
     // Update UI
-    selectedRestaurantName.textContent = restaurant.name;
-    restaurantName.textContent = restaurant.name;
-    restaurantLocation.textContent = `${restaurant.address}, ${restaurant.city}`;
-    restaurantPhone.textContent = restaurant.phone || 'Not available';
+    restaurantName.textContent = restaurant.name || 'Nimetön ravintola';
+    restaurantLocation.innerHTML = `<i class="icon">📍</i> ${restaurant.address || ''}, ${restaurant.city || ''}`;
+    restaurantPhone.innerHTML = `<i class="icon">📞</i> ${restaurant.phone || 'Ei puhelinnumeroa'}`;
 
     // Update map
-    if (restaurant.location && restaurant.location.coordinates) {
+    clearMarkers();
+    if (restaurant.location?.coordinates) {
+        console.log('Initializing map with coordinates:', restaurant.location.coordinates); // Отладка
         initMap(restaurant.location.coordinates);
         addMarker(restaurant.location.coordinates, `
             <h3>${restaurant.name}</h3>
             <p>${restaurant.address}, ${restaurant.city}</p>
         `);
+    } else {
+        console.error('Invalid restaurant location:', restaurant);
     }
 
     // Load menu
