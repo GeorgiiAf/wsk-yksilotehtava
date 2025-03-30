@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opiskelijaravintolat</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
 
@@ -21,50 +20,71 @@
             <a href="login.html" id="login-btn" class="button">Kirjaudu</a>
             <a href="register.html" id="register-btn" class="button">Rekisteröidy</a>
             <a href="profile.html" id="profile-btn" class="button">Profiili</a>
-
         </nav>
     </header>
 
     <main>
-        <div class="controls">
-            <div class="filters">
-                <input type="text" id="city-filter" placeholder="Hae kaupungin tai nimen mukaan">
-                <select id="provider-filter">
-                    <option value="">Kaikki palveluntarjoajat</option>
-                    <option value="provider1">Palveluntarjoaja 1</option>
-                </select>
-            </div>
-            <div class="menu-type">
-                <select id="menu-type">
-                    <option value="day">Päivän ruokalista</option>
-                    <option value="week">Viikon ruokalista</option>
-                </select>
+        <!-- Основной блок выбора ресторана -->
+        <div class="restaurant-selector-container">
+            <div class="restaurant-selector">
+                <button id="restaurant-dropdown-btn" class="dropdown-btn">
+                    Valitse ravintola ▼
+                </button>
+                <div id="restaurant-dropdown" class="dropdown-content">
+                    <div class="search-filters">
+                        <input type="text" id="restaurant-search" placeholder="Etsi ravintolaa...">
+                        <div class="filter-group">
+                            <select id="city-filter">
+                                <option value="">Kaikki kaupungit</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <select id="provider-filter">
+                                <option value="">Kaikki palveluntarjoajat</option>
+                            </select>
+                        </div>
+                    </div>
+                    <ul id="restaurants-list" class="restaurants-list"></ul>
+                </div>
             </div>
         </div>
 
-        <div class="content">
-            <section class="restaurant-list">
-                <h2>Ravintolat</h2>
-                <ul id="restaurants"></ul>
-            </section>
+        <!-- Детали выбранного ресторана -->
+        <div class="restaurant-details-container">
+            <div class="restaurant-details">
+                <div id="selected-restaurant">
+                    <h2 id="restaurant-name">Valitse ravintola ylhäältä</h2>
+                    <div class="restaurant-meta">
+                        <span id="restaurant-location"><i class="icon">📍</i> </span>
+                        <span id="restaurant-phone"><i class="icon">📞</i> </span>
+                    </div>
+                </div>
 
-            <section class="map">
-                <h2>Kartta</h2>
-                <div id="map-container"></div>
-            </section>
-        </div>
+                <!-- Переключатель меню -->
+                <div class="menu-toggle">
+                    <button class="menu-type-btn active" data-type="day">Päivän ruokalista</button>
+                    <button class="menu-type-btn" data-type="week">Viikon ruokalista</button>
+                </div>
 
-        <section class="menu">
-            <h2 id="menu-title">Ruokalista</h2>
-            <div id="menu-content">
+                <!-- Блок меню -->
+                <div class="menu-section">
+                    <h3 id="menu-title">Ruokalista</h3>
+                    <div id="menu-content" class="menu-content"></div>
+                </div>
+
+                <!-- Карта -->
+                <div class="map-section">
+                    <h3>Sijainti</h3>
+                    <div id="map-container" class="map-container"></div>
+                </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2025 Opiskelijaravintolat.</p>
     </footer>
-    <script src="../js/script.js"></script>
+    <script type="module" src="../js/main.js"></script>
 </body>
 
 </html>
