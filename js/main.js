@@ -23,8 +23,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log('Initializing application...');
 
     try {
-        // Initialize map
-        initMap([60.1699, 24.9384]);
 
         // Load restaurants
         allRestaurants = await fetchRestaurants();
@@ -251,7 +249,6 @@ function selectRestaurant(restaurant) {
     clearMarkers();
     if (restaurant.location?.coordinates) {
         console.log('Initializing map with coordinates:', restaurant.location.coordinates); // Отладка
-        initMap(restaurant.location.coordinates);
         addMarker(restaurant.location.coordinates, `
             <h3>${restaurant.name}</h3>
             <p>${restaurant.address}, ${restaurant.city}</p>
