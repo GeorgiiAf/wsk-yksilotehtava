@@ -28,8 +28,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Load restaurants
         allRestaurants = await fetchRestaurants();
-        console.log('Fetched restaurants:', allRestaurants);
-
         populateFilters(allRestaurants);
         renderRestaurants(allRestaurants);
         setupEventListeners();
@@ -182,31 +180,33 @@ function filterRestaurants() {
 }
 
 function setupEventListeners() {
-    // Dropdown toggle
-    dropdownBtn.addEventListener('click', (e) => {
+    // Переключение выпадающего списка
+    dropdownBtn?.addEventListener('click', (e) => {
         e.stopPropagation();
-        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        dropdownContent.classList.toggle('active');
     });
 
-    // Close dropdown when clicking outside
+    // Предотвращаем закрытие при клике внутри выпадающего списка
+    dropdownContent?.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // Закрытие при клике вне списка
     document.addEventListener('click', () => {
-        dropdownContent.style.display = 'none';
+        dropdownContent.classList.remove('active');
     });
 
-    // Filter events
-    searchInput.addEventListener('input', filterRestaurants);
-    cityFilter.addEventListener('change', filterRestaurants);
-    providerFilter.addEventListener('change', filterRestaurants);
+    // Обработчики для фильтров (остаются без изменений)
+    searchInput?.addEventListener('input', filterRestaurants);
+    cityFilter?.addEventListener('change', filterRestaurants);
+    providerFilter?.addEventListener('change', filterRestaurants);
 
-    // Menu type toggle
-    menuTypeBtns.forEach(btn => {
+    // Переключение типа меню
+    menuTypeBtns?.forEach(btn => {
         btn.addEventListener('click', function () {
             menuTypeBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-
-            if (selectedRestaurant) {
-                loadRestaurantMenu(selectedRestaurant._id);
-            }
+            if (selectedRestaurant) loadRestaurantMenu(selectedRestaurant._id);
         });
     });
 }

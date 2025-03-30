@@ -325,15 +325,16 @@ footer {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 100;
     margin-top: 5px;
+    overflow-y: auto;
 }
 
 .search-filters {
     padding: 15px;
-    background: #f9f9f9;
+    background: #f8f9fa;
     border-bottom: 1px solid #eee;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
 }
 
 .filter-group {
