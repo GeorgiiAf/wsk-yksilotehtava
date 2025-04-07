@@ -1,7 +1,5 @@
-import { initMap, addMarker, clearMarkers } from './map.js';
+import { addMarker, clearMarkers } from './map.js';
 import { fetchRestaurants, fetchRestaurantMenu } from './api.js';
-import { userService } from './userManagment.js';
-import { authService } from './authService.js';
 
 let selectedRestaurant = null;
 let allRestaurants = [];
@@ -19,18 +17,16 @@ const restaurantPhone = document.getElementById('restaurant-phone');
 const menuContent = document.getElementById('menu-content');
 const menuTypeBtns = document.querySelectorAll('.menu-type-btn');
 
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async () => {
 
     try {
-
-        // Load restaurants
         allRestaurants = await fetchRestaurants();
         populateFilters(allRestaurants);
         renderRestaurants(allRestaurants);
         setupEventListeners();
 
-        // Show first restaurant by default
         if (allRestaurants.length > 0) {
             selectRestaurant(allRestaurants[0]);
         }
@@ -141,19 +137,24 @@ function renderMenu(menuData, type) {
     } else {
         menuContent.innerHTML = `
             <div class="menu-weekly">
-                ${menuData.days?.map(day => `
-                    <div class="day-menu">
-                        <h4>${new Date(day.date).toLocaleDateString('fi-FI', { weekday: 'long', day: 'numeric', month: 'numeric' })}</h4>
-                        ${day.courses?.map(course => `
-                            <div class="menu-item">
-                                <div class="course-name">${course.name || 'Nimetön ruoka'}</div>
-                                <div class="course-info">
-                                    <span class="course-price">${course.price || ''}</span>
+                ${menuData.days?.map(day => {
+            // Прямо используем день недели из поля `date`
+            const [dayOfWeek, date] = day.date.split(' ', 2); // Разделяем на день недели и дату
+
+            return `
+                        <div class="day-menu">
+                            <h4>${dayOfWeek} ${date}</h4> <!-- Показываем день недели и дату -->
+                            ${day.courses?.map(course => `
+                                <div class="menu-item">
+                                    <div class="course-name">${course.name || 'Nimetön ruoka'}</div>
+                                    <div class="course-info">
+                                        <span class="course-price">${course.price || ''}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        `).join('') || '<p>Ei ruokalistaa tälle päivälle</p>'}
-                    </div>
-                `).join('') || '<p>Viikon ruokalista ei saatavilla</p>'}
+                            `).join('') || '<p>Ei ruokalistaa tälle päivälle</p>'}
+                        </div>
+                    `;
+        }).join('') || '<p>Viikon ruokalista ei saatavilla</p>'}
             </div>
         `;
     }
@@ -256,18 +257,3 @@ function selectRestaurant(restaurant) {
 }
 
 
-document.getElementById('register-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    try {
-        const response = await userService.register(username, password, email);
-        alert('Registration successful! Please check your email to activate your account.');
-        // Optionally redirect to login page
-    } catch (error) {
-        alert(error.message);
-    }
-});

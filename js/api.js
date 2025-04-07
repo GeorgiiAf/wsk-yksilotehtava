@@ -10,14 +10,13 @@ export async function fetchRestaurants() {
         throw error;
     }
 }
-// Fetch restaurant menu from API
-export async function fetchRestaurantMenu(restaurantId, menuType = 'day') {
+export async function fetchRestaurantMenu(restaurantId, menuType = 'day', lang = 'fi') {
     try {
         const endpoint = menuType === 'day'
-            ? `daily/${restaurantId}/fi`
-            : `weekly/${restaurantId}/fi`;
+            ? `v1/restaurants/daily/${restaurantId}/${lang}`
+            : `v1/restaurants/weekly/${restaurantId}/${lang}`;
 
-        const response = await fetch(`https://media2.edu.metropolia.fi/restaurant/api/v1/restaurants/${endpoint}`);
+        const response = await fetch(`https://media2.edu.metropolia.fi/restaurant/api/${endpoint}`);
         if (!response.ok) throw new Error('Menu not found');
 
         return await response.json();

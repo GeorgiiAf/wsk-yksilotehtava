@@ -1,0 +1,135 @@
+// profile.js
+
+// Получение текущего пользователя
+async function getUserProfile() {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        alert('Kirjaudu ensin sisään.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    try {
+        const response = await fetch('https://media2.edu.metropolia.fi/restaurant/api/v1/users/token', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            document.getElementById('profile-username').textContent = data.username || '';
+            document.getElementById('profile-email').textContent = data.email || '';
+        } else {
+            alert(data.message || 'Käyttäjän tietojen lataus epäonnistui');
+        }
+    } catch (error) {
+        console.error('Virhe käyttäjän tietojen lataamisessa:', error);
+        alert('Jokin meni pieleen, yritä uudelleen.');
+    }
+}
+
+// Обновление профиля
+async function updateUserProfile(event) {
+    event.preventDefault();
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('Kirjaudu ensin sisään.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    const newUsername = document.getElementById('new-username').value.trim();
+    const newEmail = document.getElementById('new-email').value.trim();
+    const newPassword = document.getElementById('new-password').value.trim();
+    const favoriteRestaurant = document.getElementById('Suosikkiravintola').value.trim();
+
+    const updates = {};
+
+    if (newUsername) updates.username = newUsername;
+    if (newEmail) updates.email = newEmail;
+    if (newPassword) updates.password = newPassword;
+    if (favoriteRestaurant && favoriteRestaurant !== 'Ei suosikkia') {
+        updates.favouriteRestaurant = favoriteRestaurant;
+    }
+
+    try {
+        const response = await fetch('https://media2.edu.metropolia.fi/restaurant/api/v1/users', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(updates),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert('Profiilin tiedot päivitetty onnistuneesti!');
+            await getUserProfile();
+            document.getElementById('update-profile-form').reset();
+        } else {
+            alert(data.message || 'Profiilin päivitys epäonnistui');
+        }
+    } catch (error) {
+        console.error('Virhe profiilin päivittämisessä:', error);
+        alert('Jokin meni pieleen, yritä uudelleen.');
+    }
+}
+
+
+async function uploadAvatar(event) {
+    event.preventDefault();
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('Kirjaudu ensin sisään.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    const fileInput = document.getElementById('avatar');
+    const file = fileInput.files[0];
+    if (!file) {
+        alert('Valitse kuva ennen lähettämistä.');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    try {
+        const response = await fetch('https://media2.edu.metropolia.fi/restaurant/api/v1/users/avatar', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert('Profiilikuva päivitetty!');
+            const avatarUrl = `https://media2.edu.metropolia.fi/restaurant/uploads/${data.data.avatar}?t=${Date.now()}`;
+            document.getElementById('avatar-image').src = avatarUrl;
+
+        } else {
+            alert(data.message || 'Kuvan lataus epäonnistui.');
+        }
+    } catch (error) {
+        console.error('Virhe avataria ladattaessa:', error);
+        alert('Jokin meni pieleen, yritä uudelleen.');
+    }
+}
+
+
+// Запуск при загрузке страницы
+document.addEventListener('DOMContentLoaded', getUserProfile);
+document.getElementById('update-profile-form').addEventListener('submit', updateUserProfile);
+document.getElementById('avatar-form').addEventListener('submit', uploadAvatar);

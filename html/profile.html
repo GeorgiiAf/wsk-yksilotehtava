@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profiili</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/profileStyles.css">
 </head>
 
 <body>
@@ -24,17 +24,28 @@
     <main>
         <section class="profile">
             <h2>Profiili</h2>
-            <div class="profile-pic">
-                <img src="../images/icon.png" alt="Logo" class="logo-icon">
+            <div class="profile-pic" style="text-align: center; margin-top: 1rem;">
+                <img id="avatar-image" src="../images/icon.png" alt="Profiilikuva" class="profile-avatar"
+                    style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
             </div>
+
+            <!-- Загрузка аватара -->
+            <form id="avatar-form" enctype="multipart/form-data" style="margin-top: 1rem;">
+                <label for="avatar">Vaihda profiilikuva:</label><br>
+                <input type="file" id="avatar" name="avatar" accept="image/*" required>
+                <button type="submit">Lähetä kuva</button>
+            </form>
+
             <div class="profile-info">
                 <p><strong>Käyttäjätunnus:</strong> <span id="profile-username"></span></p>
                 <p><strong>Sähköposti:</strong> <span id="profile-email"></span></p>
             </div>
+
             <form id="update-profile-form">
                 <input type="text" id="new-username" placeholder="Uusi käyttäjätunnus">
                 <input type="email" id="new-email" placeholder="Uusi sähköposti">
                 <input type="password" id="new-password" placeholder="Uusi salasana">
+                <input type="file" id="profile-photo" accept="image/*"> <!-- Новое поле для загрузки фото -->
                 <input type="text" id="Suosikkiravintola" placeholder="Suosikkiravintola" value="Ei suosikkia">
                 <button type="submit">Päivitä tiedot</button>
             </form>
@@ -44,7 +55,7 @@
     <footer>
         <p>&copy; 2025 Opiskelijaravintolat.</p>
     </footer>
-    <script src="../js/script.js"></script>
+    <script src="../js/profile.js"></script>
 </body>
 
 </html>

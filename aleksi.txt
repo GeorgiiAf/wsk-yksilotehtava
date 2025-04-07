@@ -1,0 +1,12 @@
+
+{
+  "message": "user created",
+  "data": {
+    "username": "aleksi999",
+    "email": "23aleksi999@mail.com",
+    "_id": "67f3edbd725dff3609879015",
+    "role": "user",
+    "activated": true
+  },
+  "activationUrl": "https://ethereal.email/message/Z-pwUx0frS.zmxRFZ.PtvrJlvf2MGr1nAAAAG4Vgt8.e-5CmUlntl5sDwss"
+}
