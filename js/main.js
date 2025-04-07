@@ -20,7 +20,6 @@ const menuTypeBtns = document.querySelectorAll('.menu-type-btn');
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('Initializing application...');
 
     try {
 
@@ -47,14 +46,12 @@ function showError(message) {
 
 
 function populateFilters(restaurants) {
-    console.log('Populating filters with restaurants:', restaurants); // Отладка
 
     cityFilter.innerHTML = '<option value="">Kaikki kaupungit</option>';
     providerFilter.innerHTML = '<option value="">Kaikki palveluntarjoajat</option>';
 
     const cities = [...new Set(restaurants.map(r => r.city))].filter(Boolean);
-    const providers = [...new Set(restaurants.map(r => r.provider))].filter(Boolean);
-
+    const companies = [...new Set(restaurants.map(r => r.company))].filter(Boolean);
     cities.forEach(city => {
         const option = document.createElement('option');
         option.value = city;
@@ -62,17 +59,16 @@ function populateFilters(restaurants) {
         cityFilter.appendChild(option);
     });
 
-    providers.forEach(provider => {
+    companies.forEach(company => {
         const option = document.createElement('option');
-        option.value = provider;
-        option.textContent = provider;
+        option.value = company;
+        option.textContent = company;
         providerFilter.appendChild(option);
     });
 }
 
 // Render restaurants list
 function renderRestaurants(restaurants) {
-    console.log('Rendering restaurants:', restaurants);
     restaurantsList.innerHTML = '';
 
     if (restaurants.length === 0) {
@@ -88,7 +84,7 @@ function renderRestaurants(restaurants) {
                 <div class="restaurant-meta">
                     <span>${restaurant.city || 'Kaupunki ei saatavilla'}</span>
                     <span>•</span>
-                    <span>${restaurant.provider || 'Tarjoaja ei saatavilla'}</span>
+                    <span>${restaurant.company || 'Tarjoaja ei saatavilla'}</span>
                 </div>
             </div>
         `;
@@ -168,15 +164,14 @@ function renderMenu(menuData, type) {
 function filterRestaurants() {
     const searchTerm = searchInput.value.toLowerCase();
     const city = cityFilter.value;
-    const provider = providerFilter.value;
+    const company = providerFilter.value;
 
     const filtered = allRestaurants.filter(restaurant => {
         const matchesSearch = restaurant.name.toLowerCase().includes(searchTerm) ||
             (restaurant.city && restaurant.city.toLowerCase().includes(searchTerm));
         const matchesCity = city === '' || restaurant.city === city;
-        const matchesProvider = provider === '' || restaurant.provider === provider;
-
-        return matchesSearch && matchesCity && matchesProvider;
+        const matchesCompany = company === '' || restaurant.company === company;
+        return matchesSearch && matchesCity && matchesCompany;
     });
 
     renderRestaurants(filtered);
@@ -238,7 +233,6 @@ function selectRestaurant(restaurant) {
     if (!restaurant) return;
 
     selectedRestaurant = restaurant;
-    console.log('Selected restaurant:', restaurant); // Отладка
 
     // Update UI
     restaurantName.textContent = restaurant.name || 'Nimetön ravintola';
@@ -248,7 +242,6 @@ function selectRestaurant(restaurant) {
     // Update map
     clearMarkers();
     if (restaurant.location?.coordinates) {
-        console.log('Initializing map with coordinates:', restaurant.location.coordinates); // Отладка
         addMarker(restaurant.location.coordinates, `
             <h3>${restaurant.name}</h3>
             <p>${restaurant.address}, ${restaurant.city}</p>

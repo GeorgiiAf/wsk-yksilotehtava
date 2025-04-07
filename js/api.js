@@ -1,7 +1,6 @@
 // Fetch restaurants from API
 export async function fetchRestaurants() {
     try {
-        console.log('Fetching restaurants...');
         const response = await fetch('https://media2.edu.metropolia.fi/restaurant/api/v1/restaurants');
         if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
         const data = await response.json();

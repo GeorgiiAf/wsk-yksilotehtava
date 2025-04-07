@@ -460,7 +460,6 @@ footer {
     color: #3498db;
 }
 
-/* Make sure dropdown is visible when active */
 .dropdown-content.active {
     display: block;
 }
