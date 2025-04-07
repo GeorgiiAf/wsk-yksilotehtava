@@ -1,6 +1,7 @@
 import { initMap, addMarker, clearMarkers } from './map.js';
 import { fetchRestaurants, fetchRestaurantMenu } from './api.js';
-
+import { userService } from './userManagment.js';
+import { authService } from './authService.js';
 
 let selectedRestaurant = null;
 let allRestaurants = [];
@@ -253,3 +254,20 @@ function selectRestaurant(restaurant) {
     // Load menu
     loadRestaurantMenu(restaurant._id);
 }
+
+
+document.getElementById('register-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await userService.register(username, password, email);
+        alert('Registration successful! Please check your email to activate your account.');
+        // Optionally redirect to login page
+    } catch (error) {
+        alert(error.message);
+    }
+});
