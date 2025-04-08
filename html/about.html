@@ -15,6 +15,14 @@
             <img src="../images/icon2.png" alt="Logo" class="logo-icon">
             <h1>Opiskelijaravintolat</h1>
         </div>
+
+        <div class="user-info" id="user-info"
+            style="display: none; align-items: center; gap: 0.20rem; margin-left: auto;">
+            <img id="user-avatar" src="../images/icon.png" alt="Avatar"
+                style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+            <span id="user-name" style="font-weight: 600;"></span>
+        </div>
+
         <nav>
             <a href="index.html" id="about-btn" class="button">Koti</a>
             <button id="auth-btn" class="button">Kirjaudu</button>
@@ -50,7 +58,15 @@
     <footer>
         <p>&copy; 2025 Opiskelijaravintolat.</p>
     </footer>
-    <script src=""></script>
+    <script src="../js/profileDisplay.js" type="module"></script>
+    <script type="module">
+        import { loadUserProfile } from '../js/profileDisplay.js';
+        document.addEventListener('DOMContentLoaded', loadUserProfile); 
+    </script>
+    <script src="../js/auth.js" type="module"></script>
+
+
+
 </body>
 
 </html>
