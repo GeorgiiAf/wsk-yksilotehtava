@@ -16,8 +16,8 @@
             <h1>Opiskelijaravintolat</h1>
         </div>
         <nav>
-            <a href="index.html" id="home-btn" class="button">Koti</a>
-            <a href="login.html" id="login-btn" class="button">Kirjaudu ulos</a>
+            <a href=index.html id="home-btn" class="button">Koti</a>
+            <button id="auth-btn" class="button">Kirjaudu</button>
         </nav>
     </header>
 
@@ -29,7 +29,6 @@
                     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
             </div>
 
-            <!-- Загрузка аватара -->
             <form id="avatar-form" enctype="multipart/form-data" style="margin-top: 1rem;">
                 <label for="avatar">Vaihda profiilikuva:</label><br>
                 <input type="file" id="avatar" name="avatar" accept="image/*" required>
@@ -55,6 +54,8 @@
         <p>&copy; 2025 Opiskelijaravintolat.</p>
     </footer>
     <script src="../js/profile.js"></script>
+    <script src="../js/auth.js" type="module"></script>
+
 </body>
 
 </html>

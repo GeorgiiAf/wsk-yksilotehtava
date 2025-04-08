@@ -16,6 +16,7 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+
 /* kuvake */
 .logo {
     display: flex;
@@ -35,7 +36,8 @@ header {
     color: white;
 }
 
-nav a.button {
+nav a.button,
+nav button.button {
     padding: 8px 12px;
     margin-left: 10px;
     border: none;
@@ -45,9 +47,14 @@ nav a.button {
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
+    font: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    box-sizing: border-box;
 }
 
-nav a.button:hover {
+nav a.button:hover,
+nav button.button:hover {
     background-color: #1f6391;
 }
 

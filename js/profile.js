@@ -20,9 +20,18 @@ async function getUserProfile() {
         if (response.ok) {
             document.getElementById('profile-username').textContent = data.username || '';
             document.getElementById('profile-email').textContent = data.email || '';
+
+            const avatarImage = document.getElementById('avatar-image');
+            if (data.avatar) {
+                avatarImage.src = `https://media2.edu.metropolia.fi/restaurant/uploads/${data.avatar}`;
+            } else {
+                avatarImage.src = '../images/icon.png';
+            }
+
         } else {
             alert(data.message || 'Käyttäjän tietojen lataus epäonnistui');
         }
+
     } catch (error) {
         console.error('Virhe käyttäjän tietojen lataamisessa:', error);
         alert('Jokin meni pieleen, yritä uudelleen.');
@@ -129,8 +138,6 @@ async function uploadAvatar(event) {
     }
 }
 
-
-// Запуск при загрузке страницы
 document.addEventListener('DOMContentLoaded', getUserProfile);
 document.getElementById('update-profile-form').addEventListener('submit', updateUserProfile);
 document.getElementById('avatar-form').addEventListener('submit', uploadAvatar);
