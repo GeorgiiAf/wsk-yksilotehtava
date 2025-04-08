@@ -363,7 +363,6 @@ footer {
     z-index: 1001;
 }
 
-/* Запрещаем выделение текста при кликах */
 .restaurant-selector * {
     user-select: none;
     -webkit-user-select: none;

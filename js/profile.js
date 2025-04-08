@@ -1,3 +1,6 @@
+import { getRestaurantNameById } from './api.js';
+
+
 async function getUserProfile() {
     const token = localStorage.getItem('token');
 
@@ -28,6 +31,13 @@ async function getUserProfile() {
                 avatarImage.src = '../images/icon.png';
             }
 
+            if (data.favouriteRestaurant) {
+                const restaurantName = await getRestaurantNameById(data.favouriteRestaurant);
+                const favRestaurantInput = document.getElementById('Suosikkiravintola');
+                if (favRestaurantInput) {
+                    favRestaurantInput.value = restaurantName;
+                }
+            }
         } else {
             alert(data.message || 'Käyttäjän tietojen lataus epäonnistui');
         }
@@ -51,15 +61,15 @@ async function updateUserProfile(event) {
     const newUsername = document.getElementById('new-username').value.trim();
     const newEmail = document.getElementById('new-email').value.trim();
     const newPassword = document.getElementById('new-password').value.trim();
-    const favoriteRestaurant = document.getElementById('Suosikkiravintola').value.trim();
+    const favRestaurantInput = document.getElementById('Suosikkiravintola').value.trim();
 
     const updates = {};
 
     if (newUsername) updates.username = newUsername;
     if (newEmail) updates.email = newEmail;
     if (newPassword) updates.password = newPassword;
-    if (favoriteRestaurant && favoriteRestaurant !== 'Ei suosikkia') {
-        updates.favouriteRestaurant = favoriteRestaurant;
+    if (favRestaurantInput && favRestaurantInput !== 'Ei suosikkia') {
+        updates.favouriteRestaurant = favRestaurantInput;
     }
 
     try {

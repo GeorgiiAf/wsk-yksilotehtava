@@ -1,5 +1,6 @@
 import { addMarker, clearMarkers } from './map.js';
 import { fetchRestaurants, fetchRestaurantMenu } from './api.js';
+import { updateFavoriteRestaurant } from './favorite.js';
 
 let selectedRestaurant = null;
 let allRestaurants = [];
@@ -269,6 +270,14 @@ function selectRestaurant(restaurant) {
     restaurantLocation.innerHTML = `<i class="icon">📍</i> ${restaurant.address || ''}, ${restaurant.city || ''}`;
     restaurantPhone.innerHTML = `<i class="icon">📞</i> ${restaurant.phone || 'Ei puhelinnumeroa'}`;
 
+    const favoriteBtn = document.getElementById('favorite-btn');
+
+    if (favoriteBtn) {
+        favoriteBtn.textContent = '❤️ Lisää suosikiksi';
+        favoriteBtn.onclick = () => {
+            updateFavoriteRestaurant(restaurant._id);
+        };
+    }
     // Update map
     clearMarkers();
     if (restaurant.location?.coordinates) {

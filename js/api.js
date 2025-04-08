@@ -25,3 +25,17 @@ export async function fetchRestaurantMenu(restaurantId, menuType = 'day', lang =
         throw error;
     }
 }
+
+
+export async function getRestaurantNameById(id) {
+    try {
+        const response = await fetch(`https://media2.edu.metropolia.fi/restaurant/api/v1/restaurants/${id}`);
+        const data = await response.json();
+        if (response.ok) {
+            return data.name;
+        }
+    } catch (err) {
+        console.error('Virhe ravintolan haussa:', err);
+    }
+    return 'Tuntematon ravintola';
+}
