@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
   "username": "aleksi99",
-  "password": "password1234"
+  "password": "password123"
 }
 
 
@@ -30,12 +30,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZ
 
 {
     "username": "aleksi99",
-    "password": "password1234"
+    "password": "password123"
 }
 
 ### Delete user account
 DELETE https://media2.edu.metropolia.fi/restaurant/api/v1/users
-Authorization: Bearer YOUR_TOKEN_HERE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZWtzaTk5OSIsImVtYWlsIjoiMjNhbGVrc2k5OTlAbWFpbC5jb20iLCJfaWQiOiI2N2YzZWRiZDcyNWRmZjM2MDk4NzkwMTUiLCJyb2xlIjoidXNlciIsImFjdGl2YXRlZCI6dHJ1ZSwiaWF0IjoxNzQ0MDQxNTUzfQ.9zyS8pm6Iot7a2g4qbnh833HH-EETCW9cgIDjSNLkQw
+
 
 
 ### get user account
