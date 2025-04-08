@@ -1,6 +1,3 @@
-// profile.js
-
-// Получение текущего пользователя
 async function getUserProfile() {
     const token = localStorage.getItem('token');
 
@@ -32,7 +29,6 @@ async function getUserProfile() {
     }
 }
 
-// Обновление профиля
 async function updateUserProfile(event) {
     event.preventDefault();
 
@@ -68,13 +64,18 @@ async function updateUserProfile(event) {
         });
 
         const data = await response.json();
-
         if (response.ok) {
             alert('Profiilin tiedot päivitetty onnistuneesti!');
+
+            if (newPassword) {
+                alert('Salasana vaihdettu. Kirjaudu uudelleen sisään.');
+                localStorage.removeItem('token');
+                window.location.href = 'login.html';
+                return;
+            }
+
             await getUserProfile();
             document.getElementById('update-profile-form').reset();
-        } else {
-            alert(data.message || 'Profiilin päivitys epäonnistui');
         }
     } catch (error) {
         console.error('Virhe profiilin päivittämisessä:', error);

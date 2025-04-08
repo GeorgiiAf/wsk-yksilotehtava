@@ -143,7 +143,7 @@ function renderMenu(menuData, type) {
 
             return `
                         <div class="day-menu">
-                            <h4>${dayOfWeek} ${date}</h4> <!-- Показываем день недели и дату -->
+                            <h4>${dayOfWeek} ${date}</h4>
                             ${day.courses?.map(course => `
                                 <div class="menu-item">
                                     <div class="course-name">${course.name || 'Nimetön ruoka'}</div>
