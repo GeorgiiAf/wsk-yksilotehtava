@@ -13,7 +13,7 @@ async function login(username, password) {
         console.log('Login successful:', data);
         localStorage.setItem('token', data.token);
 
-        window.location.href = 'profile.html';
+        window.location.href = 'index.html';
     } else {
         console.error('Login failed:', data.message);
         alert('Login failed: ' + data.message);

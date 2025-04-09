@@ -33,6 +33,7 @@ header {
     font-size: 22px;
 }
 
+
 nav a.button,
 nav button.button {
     padding: 8px 12px;
@@ -121,6 +122,40 @@ nav button.button:hover {
 
 #update-profile-form button:hover {
     background-color: #1f6391;
+}
+
+.file-input {
+    margin-top: 0.5rem;
+    padding: 0.4rem;
+    font-family: inherit;
+    font-size: 1rem;
+    border: 1px solid #020000;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+
+.submit-pic-btn {
+    padding: 6px 10px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-pic-btn:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
 }
 
 /* Footer */
