@@ -16,7 +16,6 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
 /* kuvake */
 .logo {
     display: flex;
@@ -28,6 +27,10 @@ header {
     width: 80px;
     height: 80px;
     border-radius: 50%;
+}
+
+.logo-icon:hover {
+    transform: scale(1.1);
 }
 
 .logo h1 {
@@ -132,7 +135,6 @@ nav button.button:hover {
 }
 
 /* ruokalistat */
-
 .menu {
     padding: 20px;
     background-color: white;
@@ -147,6 +149,32 @@ nav button.button:hover {
     background-color: #f9f9f9;
     padding: 15px;
     border-radius: 4px;
+}
+
+.menu-type-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #f5f5f5;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-type-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.menu-type-btn.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.menu-type-btn:focus {
+    outline: none;
 }
 
 footer {
@@ -209,82 +237,21 @@ footer {
     text-decoration: underline;
 }
 
-
-/* profiili */
-
-.profile {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.profile h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* profiilikuva */
-.profile-pic {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: block;
-}
-
-.profile-info {
-    margin-bottom: 20px;
-}
-
-.profile-info p {
-    margin: 10px 0;
-}
-
-.profile-info strong {
-    display: inline-block;
-    width: 120px;
-}
-
-#update-profile-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#update-profile-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #2980b9;
-    color: white;
+.favorite-button {
+    background-color: transparent;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
+    font-size: 20px;
+    color: #3081b8;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid #ddd;
+    border-radius: 5px;
 }
 
-#update-profile-form button:hover {
-    background-color: #1f6391;
-}
-
-.about {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.about h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.about p {
-    line-height: 1.6;
+.favorite-button:hover {
+    background-color: #257bb4;
+    color: white;
+    border-color: #3498db;
 }
 
 .restaurant-selector-container {
@@ -340,8 +307,6 @@ footer {
     display: block;
     animation: fadeIn 0.2s ease-out;
 }
-
-
 
 @keyframes fadeIn {
     from {
@@ -409,6 +374,7 @@ footer {
     display: flex;
     gap: 15px;
     margin-top: 10px;
+    margin-bottom: 10px;
     color: #666;
     font-size: 0.9em;
 }
