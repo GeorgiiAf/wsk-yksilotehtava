@@ -28,13 +28,6 @@ footer {
 
 }
 
-main {
-    padding: 40px 20px;
-    min-height: calc(100vh - 160px);
-    box-sizing: border-box;
-}
-
-
 /* kuvake */
 .logo {
     display: flex;
@@ -82,23 +75,60 @@ nav button.button:hover {
     background-color: #1f6391;
 }
 
-.about {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: white;
+/* Auth form styles */
+.auth-form {
+    max-width: 400px;
+    margin: 80px auto;
     padding: 30px;
+    background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    color: #333;
-    font-size: 1.1em;
-    line-height: 1.6;
-}
-
-.about h2 {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-bottom: 20px;
 }
 
-.about p {
-    line-height: 1.6;
+.auth-form h2 {
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    color: #333;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3497fa;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.auth-form a {
+    color: #3497fa;
+    text-decoration: none;
+}
+
+.auth-form a:hover {
+    text-decoration: underline;
+}
+
+
+.auth-form button:hover {
+    background-color: #2574c0;
+}
+
+.auth-form p {
+    margin-top: 15px;
+    font-size: 0.95em;
 }

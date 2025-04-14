@@ -1,0 +1,29 @@
+bobobo1234
+bobobo@malo.com
+bobobo@mal.com
+
+password
+
+
+
+
+
+
+
+bobobo1
+
+bobobo1@mail.com
+
+bobobo1
+
+новый ключ для него  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYm9ibzEiLCJlbWFpbCI6ImJvYm9ibzFAbWFsby5jb20iLCJfaWQiOiI2N2ZjZGZkMzcyNWRmZjM2MDk4ODY3ZTciLCJyb2xlIjoidXNlciIsImFjdGl2YXRlZCI6dHJ1ZSwiaWF0IjoxNzQ0NjQzNTkwfQ.-_-H3tdrzmd5kk6BmHnPpnAri9Qf_k5i6LTsQVGzy5I
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYm9ibzEiLCJlbWFpbCI6ImJvYm9ibzFAbWFsby5jb20iLCJfaWQiOiI2N2ZjZGZkMzcyNWRmZjM2MDk4ODY3ZTciLCJyb2xlIjoidXNlciIsImFjdGl2YXRlZCI6dHJ1ZSwiaWF0IjoxNzQ0NjI1NjYxfQ.C9n2C1ZAAyfYuLDLAXzNjy8e4zli2SCbIvTyvbxmrqk
+
+
+
+token   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYm9ibzEiLCJlbWFpbCI6ImJvYm9ibzFAbWFsby5jb20iLCJfaWQiOiI2N2ZjZGZkMzcyNWRmZjM2MDk4ODY3ZTciLCJyb2xlIjoidXNlciIsImFjdGl2YXRlZCI6dHJ1ZSwiaWF0IjoxNzQ0NjI2OTM2fQ._xxHvqpKhFlu7adVioexYv49BwS0vhu5N_k_q4v-V1s
+
+
+
+67fcdfd3725dff36098867e7    ---  id пользователя ...

@@ -61,16 +61,12 @@ async function updateUserProfile(event) {
     const newUsername = document.getElementById('new-username').value.trim();
     const newEmail = document.getElementById('new-email').value.trim();
     const newPassword = document.getElementById('new-password').value.trim();
-    const favRestaurantInput = document.getElementById('Suosikkiravintola').value.trim();
 
     const updates = {};
 
     if (newUsername) updates.username = newUsername;
     if (newEmail) updates.email = newEmail;
     if (newPassword) updates.password = newPassword;
-    if (favRestaurantInput && favRestaurantInput !== 'Ei suosikkia') {
-        updates.favouriteRestaurant = favRestaurantInput;
-    }
 
     try {
         const response = await fetch('https://media2.edu.metropolia.fi/restaurant/api/v1/users', {
@@ -82,20 +78,26 @@ async function updateUserProfile(event) {
             body: JSON.stringify(updates),
         });
 
+        const data = await response.json(); // <--- добавь это
+        console.log('Обновляемые данные:', updates);
+        console.log('Ответ от сервера:', response.status, data);
 
-        if (response.ok) {
-            alert('Profiilin tiedot päivitetty onnistuneesti!');
-
-            if (newPassword) {
-                alert('Salasana vaihdettu. Kirjaudu uudelleen sisään.');
-                localStorage.removeItem('token');
-                window.location.href = 'login.html';
-                return;
-            }
-
-            await getUserProfile();
-            document.getElementById('update-profile-form').reset();
+        if (!response.ok) {
+            alert('Päivitys epäonnistui: ' + (data.message || 'Tuntematon virhe'));
+            return;
         }
+
+        alert('Profiilin tiedot päivitetty onnistuneesti!');
+
+        if (newPassword) {
+            alert('Salasana vaihdettu. Kirjaudu uudelleen sisään.');
+            localStorage.removeItem('token');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        await getUserProfile();
+        document.getElementById('update-profile-form').reset();
     } catch (error) {
         console.error('Virhe profiilin päivittämisessä:', error);
         alert('Jokin meni pieleen, yritä uudelleen.');

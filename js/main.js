@@ -250,7 +250,7 @@ function selectRestaurant(restaurant) {
         addMarker(leafletCoords, `
             <h3>${restaurant.name}</h3>
             <p>${restaurant.address}, ${restaurant.city}</p>
-        `);
+        `, true);
     } else {
         console.error('Invalid restaurant location:', restaurant);
     }

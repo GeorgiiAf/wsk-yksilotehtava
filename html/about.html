@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/about.css">
 
 </head>
@@ -20,17 +19,17 @@
             <h1>Opiskelijaravintolat</h1>
         </div>
 
-        <div class="user-info" id="user-info"
-            style="display: none; align-items: center; gap: 0.20rem; margin-left: auto;">
-            <img id="user-avatar" src="../images/icon.png" alt="Avatar"
-                style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-            <span id="user-name" style="font-weight: 600;"></span>
+        <div class="user-info-box" id="user-info" style="display: none;">
+            <img id="user-avatar" src="../images/icon.png" alt="Avatar">
+            <span id="user-name"></span>
         </div>
+
 
         <nav>
             <a href="index.html" id="about-btn" class="button">Koti</a>
             <button id="auth-btn" class="button">Kirjaudu</button>
             <a href="profile.html" id="profile-btn" class="button">Profiili</a>
+            <link rel="stylesheet" href="../styles/userPanel.css">
 
         </nav>
     </header>
@@ -58,6 +57,24 @@
                 Our goal is to make it easier for students to find affordable and convenient dining options while
                 focusing on their studies.
             </p>
+            <h3>Create and Update Your Profile</h3>
+            <p>
+                You can create a personalized profile in Opiskelijaravintolat to get recommendations tailored
+                to your preferences. After creating an account, you can:
+            </p>
+            <ul>
+                <li>Update your profile with your latest details.</li>
+                <li>Save your favorite restaurants and revisit them easily.</li>
+                <li>Manage your preferences for dining options and restaurant filters.</li>
+            </ul>
+            <p>
+                Don't have an account yet? <a href="register.html">Sign up now</a> to get started!
+            </p>
+            <p>
+                Already have an account? <a href="profile.html">Update your profile</a> anytime to keep it up to
+                date.
+            </p>
+
         </section>
     </main>
 

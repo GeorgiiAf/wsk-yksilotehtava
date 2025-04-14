@@ -34,7 +34,7 @@ export function initMap(coordinates = [60.1699, 24.9384]) {
     }
 }
 
-export function addMarker(coordinates, popupContent = '') {
+export function addMarker(coordinates, popupContent = '', isHighlighted = false) {
     console.log('addMarker called with coordinates:', coordinates);
 
     if (!map) {
@@ -52,7 +52,25 @@ export function addMarker(coordinates, popupContent = '') {
             window.markerLayer = L.layerGroup().addTo(map);
         }
 
-        const marker = L.marker(coordinates).addTo(window.markerLayer);
+
+        let markerIcon;
+
+        if (isHighlighted) {
+            markerIcon = L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            }
+            );
+        } else {
+            markerIcon = new L.Icon.Default();
+        }
+
+
+        const marker = L.marker(coordinates, { icon: markerIcon }).addTo(window.markerLayer);
         console.log('Marker successfully added:', marker);
 
         if (popupContent) {
