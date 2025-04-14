@@ -16,6 +16,15 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+footer {
+    text-align: center;
+    padding: 10px;
+    color: white;
+    margin-top: 20px;
+    background: linear-gradient(135deg, #3497fa, #8a2be2);
+}
+
+
 /* kuvake */
 .logo {
     display: flex;
@@ -177,13 +186,6 @@ nav button.button:hover {
     outline: none;
 }
 
-footer {
-    text-align: center;
-    padding: 10px;
-    color: white;
-    margin-top: 20px;
-    background: linear-gradient(135deg, #3497fa, #8a2be2);
-}
 
 /* sisäämkirjautuminen ja rekisteröinti */
 
@@ -220,7 +222,7 @@ footer {
 }
 
 .auth-form button:hover {
-    background-color: #1f6391;
+    background-color: #007bcd;
 }
 
 .auth-form p {
@@ -260,6 +262,12 @@ footer {
     padding: 0 20px;
 }
 
+.restaurant-selector {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto 30px;
+}
+
 .restaurant-details-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -269,11 +277,7 @@ footer {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.restaurant-selector {
-    position: relative;
-    max-width: 500px;
-    margin: 0 auto 30px;
-}
+
 
 .dropdown-btn {
     width: 100%;
