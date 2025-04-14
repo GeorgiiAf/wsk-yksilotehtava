@@ -1,4 +1,4 @@
-import { getRestaurantNameById } from './api.js';
+import { getRestaurantNameById } from './apiRestaurant.js';
 
 
 async function getUserProfile() {
@@ -82,7 +82,7 @@ async function updateUserProfile(event) {
             body: JSON.stringify(updates),
         });
 
-        const data = await response.json();
+
         if (response.ok) {
             alert('Profiilin tiedot päivitetty onnistuneesti!');
 

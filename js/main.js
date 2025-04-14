@@ -1,7 +1,7 @@
 import { addMarker, clearMarkers } from './map.js';
-import { fetchRestaurants, fetchRestaurantMenu } from './api.js';
-import { updateFavoriteRestaurant } from './favorite.js';
-import { loadUserProfile } from './profileDisplay.js';
+import { fetchRestaurants, fetchRestaurantMenu } from './apiRestaurant.js';
+import { updateFavoriteRestaurant } from './favoriteRestaurant.js';
+import { loadUserProfile } from './profilePanel.js';
 
 let selectedRestaurant = null;
 let allRestaurants = [];
@@ -21,7 +21,7 @@ const menuTypeBtns = document.querySelectorAll('.menu-type-btn');
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async () => {
-    loadUserProfile();
+    await loadUserProfile();
 
     try {
         allRestaurants = await fetchRestaurants();

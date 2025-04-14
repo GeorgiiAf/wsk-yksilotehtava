@@ -1,4 +1,4 @@
-import { fetchRestaurants } from './api.js';
+import { fetchRestaurants } from './apiRestaurant.js';
 
 const L = window.L;
 let map;
