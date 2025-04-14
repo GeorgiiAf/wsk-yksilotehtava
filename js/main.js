@@ -10,7 +10,6 @@ let allRestaurants = [];
 const dropdownBtn = document.getElementById('restaurant-dropdown-btn');
 const dropdownContent = document.getElementById('restaurant-dropdown');
 const restaurantsList = document.getElementById('restaurants-list');
-const searchInput = document.getElementById('restaurant-search');
 const cityFilter = document.getElementById('city-filter');
 const providerFilter = document.getElementById('provider-filter');
 const restaurantName = document.getElementById('restaurant-name');
@@ -158,16 +157,14 @@ function renderMenu(menuData, type) {
 
 // Filter restaurants
 function filterRestaurants() {
-    const searchTerm = searchInput.value.toLowerCase();
     const city = cityFilter.value;
     const company = providerFilter.value;
 
     const filtered = allRestaurants.filter(restaurant => {
-        const matchesSearch = restaurant.name.toLowerCase().includes(searchTerm) ||
-            (restaurant.city && restaurant.city.toLowerCase().includes(searchTerm));
+
         const matchesCity = city === '' || restaurant.city === city;
         const matchesCompany = company === '' || restaurant.company === company;
-        return matchesSearch && matchesCity && matchesCompany;
+        return matchesCity && matchesCompany;
     });
 
     renderRestaurants(filtered);
@@ -186,7 +183,6 @@ function setupEventListeners() {
     });
 
     const dropdownElements = [
-        searchInput,
         cityFilter,
         providerFilter,
         restaurantsList
@@ -205,7 +201,6 @@ function setupEventListeners() {
         });
     });
 
-    searchInput?.addEventListener('input', filterRestaurants);
     cityFilter?.addEventListener('change', filterRestaurants);
     providerFilter?.addEventListener('change', filterRestaurants);
 

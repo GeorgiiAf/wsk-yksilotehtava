@@ -346,12 +346,6 @@ footer {
     border-radius: 4px;
 }
 
-#restaurant-search {
-    flex: 2;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
 
 .restaurants-list {
     list-style: none;
