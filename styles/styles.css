@@ -25,7 +25,6 @@ footer {
     margin-top: 20px;
     background: linear-gradient(135deg, #667eea, #764ba2);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-
 }
 
 
@@ -439,4 +438,96 @@ nav button.button:hover {
 
 .dropdown-content.active {
     display: block;
+}
+
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .logo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo h1 {
+        font-size: 18px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    nav a.button,
+    nav button.button {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .content {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .controls {
+        flex-direction: column;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .map,
+    .restaurant-list {
+        width: 100%;
+    }
+
+    #map-container {
+        height: 200px;
+    }
+
+    .auth-form {
+        padding: 15px;
+        margin: 20px 10px;
+    }
+
+    .menu-type-btn {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .restaurant-details-container,
+    .restaurant-selector-container {
+        padding: 10px;
+    }
+
+    .dropdown-btn,
+    .dropdown-content {
+        font-size: 14px;
+    }
+
+    .restaurant-meta {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .course-info {
+        flex-direction: column;
+        gap: 4px;
+    }
 }

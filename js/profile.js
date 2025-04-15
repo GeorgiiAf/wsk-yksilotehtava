@@ -78,9 +78,7 @@ async function updateUserProfile(event) {
             body: JSON.stringify(updates),
         });
 
-        const data = await response.json(); // <--- добавь это
-        console.log('Обновляемые данные:', updates);
-        console.log('Ответ от сервера:', response.status, data);
+        const data = await response.json();
 
         if (!response.ok) {
             alert('Päivitys epäonnistui: ' + (data.message || 'Tuntematon virhe'));

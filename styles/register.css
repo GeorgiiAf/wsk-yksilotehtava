@@ -132,3 +132,64 @@ nav button.button:hover {
     margin-top: 15px;
     font-size: 0.95em;
 }
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .logo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo h1 {
+        font-size: 20px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    nav a.button,
+    nav button.button {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .auth-form {
+        margin: 40px 15px;
+        padding: 20px;
+    }
+
+    .auth-form h2 {
+        font-size: 1.4em;
+    }
+
+    .auth-form input,
+    .auth-form button {
+        font-size: 0.95em;
+        padding: 10px;
+    }
+
+    .auth-form p {
+        font-size: 0.9em;
+    }
+
+    footer {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}

@@ -16,6 +16,14 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+footer {
+    text-align: center;
+    padding: 12px;
+    color: white;
+    margin-top: 40px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -164,11 +172,80 @@ nav button.button:hover {
     transform: scale(1.05);
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 12px;
-    color: white;
-    margin-top: 40px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .logo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo h1 {
+        font-size: 20px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    nav a.button,
+    nav button.button {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .profile {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+
+    .profile h2 {
+        font-size: 1.4em;
+    }
+
+    .profile-info p {
+        font-size: 14px;
+    }
+
+    .profile-info strong {
+        width: 100px;
+        font-size: 13px;
+    }
+
+    .profile-pic img {
+        width: 100px;
+        height: 100px;
+    }
+
+    #update-profile-form input,
+    #update-profile-form button,
+    .file-input {
+        font-size: 0.95em;
+        padding: 10px;
+    }
+
+    .submit-pic-btn {
+        font-size: 0.9em;
+        padding: 5px 8px;
+        margin-top: 10px;
+    }
+
+    footer {
+        padding: 10px;
+        font-size: 0.9em;
+    }
 }
